@@ -56,6 +56,7 @@ sb_south_county <- st_read('data/SB_county_south.shp')
 # reading in landsat data files 
 filelist <- list.files('data/landsat-data/', full.names = TRUE)
 
+
 ```
 
 **Loading Landsat Data**
@@ -64,7 +65,7 @@ In order to make a raster stack based on the 6 bands contained in the `landsat_d
 
 I will use the `plotRGB` function to plot a true color image based on the generated raster `landsat_sb_07`. Making a Red-Green-Blue plot based on the three layers in the SpatRaster will generate a true color image.
 
-```{r}
+```{r message = FALSE}
 # reading in the files and generating a raster stack
 landsat_sb_07 <- rast(filelist)
 
@@ -79,7 +80,7 @@ plotRGB(landsat_sb_07, r = 3, g =2, b =1, stretch = 'lin')
 
 In order to refine our analysis, we will transform the read in shape file which contains the bounds of Southern Santa Barbara County to match the CRS of the `landsat_sb_07` data. I will also use the `crop` function to crop the `landsat_sb_07` data to crop to the bounds of the Southern Santa Barbara county shapefile.
 
-```{r}
+```{r message=FALSE}
 # changing the crs in order to match the crs of the landsat data
 sb_south_county <- st_transform(sb_south_county, crs = crs(landsat_sb_07))
 
@@ -103,7 +104,7 @@ I first will reclassify the raster stack and then adjust values in the reclassif
 
 Valid ranges for this collection is `7,273-43,636` . Any values outside of this range will be classified as NA.
 
-```{r}
+```{r message=FALSE}
 # saving reclassifying values as recl
 recl <- matrix(c(-Inf, 7273, NA,
                  43636, Inf, NA),
@@ -123,7 +124,7 @@ plotRGB(landsat, r = 3, g = 2, b =1, stretch = 'lin')
 
 In order to extract reflectance values for training data, I will use the `training_data` shapefile to extract spectral values at each site in order to make a data frame containing land cover types and their corresponding spectral reflectance.
 
-```{r}
+```{r message=FALSE}
 # read in and transform training data
 training_data <- st_read("data/trainingdata.shp") %>%
   st_transform(., crs = crs(landsat))
@@ -153,7 +154,7 @@ The `rpart` function needs to know the model formula and training data desired a
 
 In order to understand how the decision tree will classify the pixels, I can plot the results. This decision tree is made up of a hierarchy of binary decisions. Each decision rule has 2 outcomes based on a conditional statement pertaining to values in each spectral band.
 
-```{r}
+```{r message = FALSE}
 # establishing model formula
 sb_formula <- type~ red + green + blue + NIR + SWIR1 + SWIR2
 
@@ -171,7 +172,7 @@ prp(sb_decision_tree)
 
 Now that I have generated the decision tree, I can now apply it to the entire image. Using the `terra::predict()` function, I will apply the model to our data. In order for this to work properly, each name of the layers need to match the column names of the predictors used to generate the decision tree. The `predict()` function will return a raster layer with integer values which correspond to the factor levels in the training data.
 
-```{r}
+```{r message = FALSE}
 # classifying image based on decision tree
 sb_classification <- predict(landsat, sb_decision_tree, type = 'class', na.rm = TRUE)
 
@@ -200,6 +201,6 @@ In conclusion, reclassifying an image to help predict land cover type is a very 
 
 ## Works Cited
 
-\"How Do I Use a Scale Factor with Landsat Level-2 Science Products?\" *How Do I Use a Scale Factor with Landsat Level-2 Science Products? \| U.S. Geological Survey*, USGS, www.usgs.gov/faqs/how-do-i-use-a-scale-factor-landsat-level-2-science-products#:\~:text=Landsat%20Collection%202%20surface%20temperature,the%20scale%20factor%20is%20applied.
+"How Do I Use a Scale Factor with Landsat Level-2 Science Products?" *How Do I Use a Scale Factor with Landsat Level-2 Science Products? \| U.S. Geological Survey*, USGS, www.usgs.gov/faqs/how-do-i-use-a-scale-factor-landsat-level-2-science-products#:\~:text=Landsat%20Collection%202%20surface%20temperature,the%20scale%20factor%20is%20applied.
 
-\"What Is Lidar and What Is It Used For?\" *American Geosciences Institute*, 2 Nov. 2020, www.americangeosciences.org/critical-issues/faq/what-lidar-and-what-it-used#:\~:text=LIDAR%20(sometimes%20also%20written%20as,and%20watershed%20and%20river%20surveys.
+"What Is Lidar and What Is It Used For?" *American Geosciences Institute*, 2 Nov. 2020, www.americangeosciences.org/critical-issues/faq/what-lidar-and-what-it-used#:\~:text=LIDAR%20(sometimes%20also%20written%20as,and%20watershed%20and%20river%20surveys.
