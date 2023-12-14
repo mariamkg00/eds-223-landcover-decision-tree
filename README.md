@@ -4,6 +4,7 @@
 ## Purpose
 The purpose behind this project is to test whether or not LiDAR is a worthy tool of geospatial analysis, especially in terms of the classification of land cover. LiDAR (Light Detection and Ranging)" is a remote sensing method that uses light in the form of a pulsed laser to measure ranges (variable distances to the Earth”(americangeosciences.org). Reclassifying an image to help predict land cover type is a very useful tool to help record whether or not it changes over time.
 
+In order to access the data, please unzip this [folder] (https://drive.google.com/drive/folders/1ON8FbDqcTjg2PKHmNGgyN7odTqpOnXla?usp=sharing). 
 ## File structure
 ```
 ├───data
