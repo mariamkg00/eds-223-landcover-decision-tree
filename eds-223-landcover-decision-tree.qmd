@@ -200,6 +200,6 @@ In conclusion, reclassifying an image to help predict land cover type is a very 
 
 ## Works Cited
 
-\"How Do I Use a Scale Factor with Landsat Level-2 Science Products?\" *How Do I Use a Scale Factor with Landsat Level-2 Science Products? \| U.S. Geological Survey*, USGS, www.usgs.gov/faqs/how-do-i-use-a-scale-factor-landsat-level-2-science-products#:\~:text=Landsat%20Collection%202%20surface%20temperature,the%20scale%20factor%20is%20applied.
+"How Do I Use a Scale Factor with Landsat Level-2 Science Products?" *How Do I Use a Scale Factor with Landsat Level-2 Science Products? \| U.S. Geological Survey*, USGS, www.usgs.gov/faqs/how-do-i-use-a-scale-factor-landsat-level-2-science-products#:\~:text=Landsat%20Collection%202%20surface%20temperature,the%20scale%20factor%20is%20applied.
 
-\"What Is Lidar and What Is It Used For?\" *American Geosciences Institute*, 2 Nov. 2020, www.americangeosciences.org/critical-issues/faq/what-lidar-and-what-it-used#:\~:text=LIDAR%20(sometimes%20also%20written%20as,and%20watershed%20and%20river%20surveys.
+"What Is Lidar and What Is It Used For?" *American Geosciences Institute*, 2 Nov. 2020, www.americangeosciences.org/critical-issues/faq/what-lidar-and-what-it-used#:\~:text=LIDAR%20(sometimes%20also%20written%20as,and%20watershed%20and%20river%20surveys.
