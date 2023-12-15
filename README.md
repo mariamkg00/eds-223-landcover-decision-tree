@@ -6,6 +6,8 @@ The purpose behind this project is to test whether or not LiDAR is a worthy tool
 
 In order to access the data, please unzip this [folder](https://drive.google.com/drive/folders/1ON8FbDqcTjg2PKHmNGgyN7odTqpOnXla?usp=sharing). 
 ## File structure
+
+Because of the large size of the data folder, it is included in the .gitignore file. 
 ```
 C:.
 |   .gitignore
